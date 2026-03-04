@@ -1,0 +1,55 @@
+\documentclass[12pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{amsmath}
+
+\title{The Effect of Paid Search Advertising on Revenue: \\
+A Replication of the eBay Natural Experiment}
+\author{Kyle Willis}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\section{Introduction}
+This paper examines the causal effect of paid search advertising on eBay's revenue. Firms spend billions of dollars annually on search engine marketing (SEM), yet measuring its true causal effect is difficult because ads tend to appear precisely when users are already likely to buy. To overcome this challenge, we replicate the natural experiment of Blake et al. (2014), in which eBay turned off paid search advertising in a subset of markets, allowing for a clean comparison of revenue trends between treated and untreated markets.
+
+\section{Experimental Setting}
+Blake et al. (2014) convinced eBay to stop bidding on Google AdWords in 65 of 210 designated market areas (DMAs) in the United States. The treatment began on May 22, 2012 and lasted eight weeks. DMAs in the treatment group had paid search turned off, while DMAs in the control group kept paid search running.
+
+This was not a fully randomized trial. The largest DMAs were excluded from treatment, meaning the treatment and control groups differed in their baseline revenue levels before the experiment began. This imbalance means we cannot simply compare average revenue between groups — we need a method that accounts for pre-existing differences. This motivates the use of a difference-in-differences (DID) design, which compares the change in revenue before and after May 22 across the two groups.
+
+\section{Data and Figures}
+The dataset contains daily revenue observations for 210 DMAs from April to July 2012. Each observation includes the date, a DMA identifier, whether the DMA was in the treatment or control group, and the revenue generated that day.
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.85\textwidth]{../output/figures/figure_5_2.png}
+\caption{Average revenue for treatment and control DMAs over time. The dashed line marks May 22, 2012, when SEM was turned off for the treatment group.}
+\label{fig:revenue}
+\end{figure}
+The control group has noticeably higher average revenue than the treatment group throughout the entire period, reflecting the fact that the largest DMAs were excluded from treatment. Both groups show similar weekly oscillation patterns. At this scale it is difficult to see a clear divergence between the groups after May 22.
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.85\textwidth]{../output/figures/figure_5_3.png}
+\caption{Log-scale average revenue difference between control and treatment groups over time. The gap appears to increase after May 22.}
+\label{fig:logdiff}
+\end{figure}
+Figure 5.3 shows the log ratio of control to treatment revenue over time. Before May 22 this ratio fluctuates around a stable level, suggesting the two groups were trending similarly before the experiment. After May 22 the gap appears to increase slightly, suggesting that turning off paid search may have reduced revenue in the treatment group.
+\section{Results}
+
+\input{../output/tables/did_table.tex}
+The DID estimate suggests that turning off paid search reduced eBay revenue by approximately 0.66 percent. However, the 95 percent confidence interval includes zero, meaning the effect is not statistically significant at the 5 percent level. In other words, we cannot rule out that the true effect is zero. This makes intuitive sense for a well-known brand like eBay — most users would find the site through organic search results anyway, so paid search ads may not be driving much additional revenue.
+\section{Conclusion}
+The DID analysis finds a small, statistically insignificant effect of turning off paid search advertising on eBay's revenue. This replicates the main finding of Blake et al. (2014). There are some limitations to keep in mind. The data is a scaled and shifted version of real revenue figures, the treatment was not fully randomized, and we use a simple DID rather than a regression with additional controls. Nevertheless, the result has important implications for how firms measure the return on investment of their marketing spending, particularly for well-known brands where organic search may be a strong substitute for paid search.
+\begin{thebibliography}{9}
+\bibitem{blake2014}
+Blake, T., C. Nosko, and S. Tadelis (2014).
+``Consumer Heterogeneity and Paid Search Effectiveness: A Large-Scale Field Experiment.''
+\textit{Econometrica}, 83(1): 155--174.
+\bibitem{taddy2019}
+Taddy, M. (2019).
+\textit{Business Data Science}. McGraw-Hill, Chapter 5.
+\end{thebibliography}
+
+\end{document}
