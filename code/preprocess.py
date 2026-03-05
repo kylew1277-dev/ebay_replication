@@ -1,6 +1,8 @@
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
+import os
+os.makedirs('temp', exist_ok=True)
 
 # Load data
 df = pd.read_csv('input/PaidSearch.csv')
